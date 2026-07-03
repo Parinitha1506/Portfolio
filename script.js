@@ -110,56 +110,52 @@ typeRole();
 SCROLL REVEAL
 -------------------------- */
 
-const revealElements=
+const revealElements = document.querySelectorAll(".reveal");
 
-document.querySelectorAll(
-".reveal"
-);
+function reveal() {
 
-function reveal(){
+    revealElements.forEach((el) => {
 
-revealElements.forEach(
+        const top = el.getBoundingClientRect().top;
+        const visible = window.innerHeight - 120;
 
-(el)=>{
+        if (top < visible) {
+            el.classList.add("active");
+        }
 
-const top=
-
-el.getBoundingClientRect()
-.top;
-
-const visible=
-
-window.innerHeight
--
-120;
-
-if(
-top
-<
-visible
-){
-
-el.classList.add(
-"active"
-);
+    });
 
 }
 
-}
-
-);
-
-}
-
-window.addEventListener(
-
-"scroll",
-
-reveal
-
-);
+window.addEventListener("scroll", reveal);
 
 reveal();
+
+
+/* --------------------------
+SMOOTH NAVBAR SCROLL
+-------------------------- */
+
+document.querySelectorAll('nav a').forEach(anchor => {
+
+    anchor.addEventListener('click', function(e) {
+
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute('href'));
+
+        if (target) {
+
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+        }
+
+    });
+
+});
 
 
 
@@ -656,3 +652,51 @@ card.style.transform=
 }
 
 );
+
+const btn = document.getElementById("themeToggle");
+
+btn.onclick = function(){
+
+document.body.classList.toggle("light-mode");
+
+if(document.body.classList.contains("light-mode"))
+
+btn.innerHTML="☀️";
+
+else
+
+btn.innerHTML="🌙";
+
+}
+
+const skillCards = document.querySelectorAll(".skill-card");
+
+skillCards.forEach(card=>{
+
+card.addEventListener("mouseenter",()=>{
+
+card.style.transform="translateY(-10px) scale(1.05)";
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+card.style.transform="translateY(0) scale(1)";
+
+});
+
+});
+
+
+
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute('href'));
+
+        target.scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
